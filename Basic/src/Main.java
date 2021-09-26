@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
 
@@ -14,6 +16,8 @@ public class Main {
         System.out.println("I own " + turtleCount + " " + pluralize("turtle", turtleCount) + ".");
 
         flipNHeads(4);
+
+        clock();
 
     }
 
@@ -48,5 +52,45 @@ public class Main {
         System.out.println("It took " + trailNumber + " " + pluralize("flip", trailNumber) + " to flip " + headNumber + " head in a row.");
     }
 
+    //clock
+//    public static void clock(){
+//
+//        while (true){
+//            float speed=0f;
+//            LocalDateTime now = LocalDateTime.now();
+//            int hour = now.getHour();
+//            int minute = now.getMinute();
+//            int second = now.getSecond();
+//            // or, if you're feeling fancy
+//            String time = now.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+//
+//                    while(second == now.getSecond()){
+//                        speed= speed+1;
+//                    }
+//
+//            System.out.println(time + " " + speed / 1000000 + " MHz");
+//
+//        }
+//
+//    }
+
+    public static void clock() {
+        while (true) {
+            float speed = 0f;
+            LocalDateTime now = LocalDateTime.now();
+            int hour = now.getHour();
+            int minute = now.getMinute();
+            int second = now.getSecond();
+            String time = now.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+
+            while (second == LocalDateTime.now().getSecond()) {
+                speed = speed + 1;
+            }
+
+            System.out.println(time + " " + speed / 1000000 + " MHz");
+
+        }
+
+    }
 }
 
