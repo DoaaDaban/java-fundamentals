@@ -1,5 +1,8 @@
 # java-fundamentals
-
+*basic
+- clock Method .
+- flipNHead method .
+- plurizal method .
 *basiclibrary
 - roll Method .
 - AverageFinder method .
