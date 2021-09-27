@@ -42,36 +42,7 @@ public class Library {
         return sum/integers.length;
     }
 
-    int analyzeWeatherData (int[][] arr) {
-        Set <Integer> dataWeather = new HashSet<>();
-        int min = Integer.MAX_VALUE , max = Integer.MIN_VALUE ;
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr[i].length; j++) {
-                dataWeather.add(arr[i][j]);
-                if(arr[i][j] < min) {
-                    min = arr[i][j];
-                }
-                else if (arr[i][j] > max ) {
-                    max = arr[i][j];
-                }
-            }
-        }
-        System.out.println("High: " + max);
-        System.out.println("Low: " + min);
-        int tempMin = min;
-        for (int i = min; i <= max; i++) {
-            if (!dataWeather.contains(i)){
-                System.out.println("Never saw temperature: " + tempMin);
-            }
-            tempMin++;
-        }
 
-        return max;
-    }
-
-    //    Method to analyze given weather data as an array of arrays
-    //    prints the minimum and maximum values
-    //    prints the temperatures between minimum and maximum data that hasn't showed up
     static int[] lowestAverage(int[][] arr) {
         double avg = 0 , minAvg = Integer.MAX_VALUE;
         int minAvgArr[] = arr[0];
