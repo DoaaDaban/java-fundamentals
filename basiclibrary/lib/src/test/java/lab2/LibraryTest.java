@@ -5,7 +5,12 @@ package lab2;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
+//import static org.junit.jupiter.api.Assertions.*;
 
 class LibraryTest {
     @Test
@@ -52,6 +57,36 @@ class LibraryTest {
 
         assertArrayEquals(expectedArray, classUnderTest.lowestAverage(weeklyMonthTemperatures),
                 "lowestAvg should return the lowest array in the parent array which is {55, 54, 60, 53, 59, 57, 61}");
+    }
+    @Test
+    @DisplayName("minMaxFromArrayOfArrays should return min & max temp.")
+    public void minMaxFromArrayOfArraysMethod(){
+        int[][] weeklyMonthTemperatures = {
+                {66, 64, 58, 65, 71, 57, 60},
+                {57, 65, 65, 70, 72, 65, 51},
+                {55, 54, 60, 53, 59, 57, 61},
+                {65, 56, 55, 52, 55, 62, 57}
+        };
+        Library classUnderTest = new Library();
+        assertEquals(72, classUnderTest.minMaxFromArrayOfArrays(weeklyMonthTemperatures).get("Max"), "minMaxFromArrayOfArrays should return 72 as max temp.");
+        assertEquals(51, classUnderTest.minMaxFromArrayOfArrays(weeklyMonthTemperatures).get("Min"), "minMaxFromArrayOfArrays should return 51 as min temp.");
+    }
+    @Test
+    @DisplayName("tally should return the name that has the max. votes which is Bush.")
+    public void tallyMethod(){
+        List<String> votes = new ArrayList<>();
+        votes.add("Bush");
+        votes.add("Bush");
+        votes.add("Bush");
+        votes.add("Shrub");
+        votes.add("Hedge");
+        votes.add("Shrub");
+        votes.add("Bush");
+        votes.add("Hedge");
+        votes.add("Bush");
+        Library classUnderTest = new Library();
+
+        assertEquals("Bush",classUnderTest.tally(votes),"tally should return the name that has the max. votes which is Bush.");
     }
 
 }

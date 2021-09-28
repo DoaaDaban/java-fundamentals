@@ -11,7 +11,7 @@ public class Library {
         return true;
     }
 
-    static int[] roll (int n) {
+    int[] roll (int n) {
         Random rnd = new Random();
         int dice[] = new int[n];
         for (int i = 0; i < n; i++) {
@@ -20,20 +20,20 @@ public class Library {
         return dice;
     }
 
-    static boolean containsDuplicates (int[] arr) {
+    boolean containsDuplicates (int[] arr) {
         int currItem;
         for (int i = 0; i < arr.length; i++) {
             currItem = arr[i];
             for (int j = i+1; j < arr.length; j++) {
                 if(arr[j] == currItem){
-                    return false;
+                    return true;
                 }
             }
         }
-        return true;
+        return false;
     }
 
-    static double findAverage(int [] integers) {
+    double findAverage(int [] integers) {
         double sum = 0 ;
         for (int i = 0; i < integers.length; i++) {
             sum += integers[i];
@@ -43,7 +43,7 @@ public class Library {
     }
 
 
-    static int[] lowestAverage(int[][] arr) {
+    int[] lowestAverage(int[][] arr) {
         double avg = 0 , minAvg = Integer.MAX_VALUE;
         int minAvgArr[] = arr[0];
         for (int i = 0; i < arr.length; i++) {
@@ -61,6 +61,82 @@ public class Library {
         return minAvgArr;
     }
 
+    HashMap<String, Integer> minMaxFromArray(Object[] arr){
+        HashMap<String, Integer> minMax = new HashMap<>();
+
+        int minValue = (int) arr[0];
+        int maxValue = (int) arr[0];
+        for (int i = 0; i < arr.length; i++) {
+            if (minValue >= (int) arr[i]) {
+                minValue = (int) arr[i];
+            }
+            if (maxValue <= (int) arr[i]) {
+                maxValue = (int) arr[i];
+            }
+        }
+        minMax.put("Min", minValue);
+        minMax.put("Max", maxValue);
+        return minMax;
+    }
+
+    HashMap<String, Integer> minMaxFromArrayOfArrays(int[][] arrOfArr){
+
+        HashSet<Integer> temperatures = new HashSet<>();
+        for (int[] tempArr : arrOfArr) {
+            for (int temp : tempArr) {
+                temperatures.add(temp);
+            }
+        }
+        HashMap<String, Integer> minMax = minMaxFromArray(temperatures.toArray());
+
+        int min = minMax.get("Min");
+        int max = minMax.get("Max");
+
+        System.out.println("Low: " + min);
+        System.out.println("High: " + max);
+
+        HashMap<Integer, Integer> fromMinToMax = new HashMap<>();
+
+        for (int i = min; i <= max; i++) {
+            fromMinToMax.put(i,i);
+        }
+        for (int temperature : temperatures) {
+
+            if (fromMinToMax.containsKey(temperature)){
+                fromMinToMax.remove(temperature,temperature);
+            }
+
+        }
+        for (Integer key : fromMinToMax.keySet()) {
+            System.out.println("Never saw temperature: " + key);
+        }
+        return minMax;
+    }
+
+    String tally(List<String> votes){
+        HashMap<String, Integer> votesNum = new HashMap<>();
+        for (String elem : votes) {
+            if (votesNum.containsKey(elem)){
+                votesNum.put(elem,votesNum.get(elem) + 1);
+            }else{
+                votesNum.put(elem,1);
+            }
+        }
+        int maxVotes = 0;
+        for (int values : votesNum.values()) {
+            if (maxVotes <= values) {
+                maxVotes = values;
+            }
+        }
+        String winner = "";
+        for (String key : votesNum.keySet()) {
+            if (votesNum.get(key) == maxVotes) {
+                winner =  key;
+            }
+        }
+
+        return winner;
+    }
 
 
 }
