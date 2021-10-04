@@ -1,59 +1,42 @@
 package inheritance;
 
-public class Review  {
+import interfaces.ReviewInterface;
 
-    private String author= "";
-    private float numOfStars=0;
-    private String body="";
-    private Restaurant restaurant;
+public class Review implements ReviewInterface {
+    private String body;
+    private String author;
+    public double stars;
 
-    public Review(String author,String body, float numOfStars, Restaurant restaurant) {
-        if (numOfStars >= 0 && numOfStars<=5){
-            this.author = author;
-            this.body= body;
-            this.numOfStars= numOfStars;
-            this.restaurant= restaurant;
-        }
-
+    Review(String body, String author, double stars) {
+        this.body = body;
+        this.author = author;
+        this.stars = stars;
     }
 
-//    @Override
-//    public String toString() {
-//        return "Review{" +
-//                "author='" + author + '\'' +
-//                ", numOfStars=" + numOfStars +
-//                ", body='" + body + '\'' +
-//                ", restaurant=" + restaurant +
-//                '}';
-//    }
+    @Override
+    public double getStars() {
+        return this.stars;
+    }
+
+    @Override
+    public String getAuthor() {
+        return this.author;
+    }
+
+    @Override
+    public String getBody() {
+        return this.body;
+    }
+
 
     @Override
     public String toString() {
-        return author + ": \n" + " ===> " + body +" I rate this restaurant with " + numOfStars + " star"+ plural();
-    }
-
-    public String plural(){
-        if (numOfStars == 1){
-            return "";
-        }else {
-            return "s";
-        }
+        return "Review{" +
+                "body='" + body + '\'' +
+                ", author='" + author + '\'' +
+                ", stars=" + stars +
+                '}';
     }
 
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public float getNumOfStars() {
-        return numOfStars;
-    }
-
-    public String getBody() {
-        return body;
-    }
-
-    public Restaurant getRestaurant() {
-        return restaurant;
-    }
 }
