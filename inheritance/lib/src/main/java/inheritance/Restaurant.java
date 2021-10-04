@@ -3,52 +3,83 @@
  */
 package inheritance;
 
-import java.util.ArrayList;
+import interfaces.RestaurantInterface;
 
-public class Restaurant {
-    private String name="";
-    private float numOfStars=0;
-    private double price=0;
-    private ArrayList<Review> reviews= new ArrayList<>();
+import java.util.*;
 
-    public Restaurant(String name, double price) {
+public class Restaurant implements RestaurantInterface {
+
+    private String name;
+    private double numberOfStars ;
+    private String priceCategory;
+
+
+
+    private LinkedList<Review> reviews = new LinkedList<>();
+
+    //  Constructor
+
+    public Restaurant(String name, double numberOfStars, String  priceCategory) {
+
         this.name = name;
-        this.price= price;
+
+        if (numberOfStars > 5){
+            this.numberOfStars = 5;
+        }else if(numberOfStars<0){
+            this.numberOfStars = 0;
+        }else{
+            this.numberOfStars = numberOfStars;
+        }
+
+        this.priceCategory = priceCategory;
     }
 
+    //  Methods
 
-
-    public String getName() {
-        return name;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public float getNumOfStars() {
-        return numOfStars;
-    }
-
-    public ArrayList<Review> getReviews() {
+    public LinkedList<Review> getReviews() {
         return reviews;
     }
 
-    public void addReview(Review review){
-        reviews.add(review);
-
-        int sum=0;
-        for (Review rev: reviews){
-            sum= (int) (rev.getNumOfStars() + sum);
-        }
-        numOfStars= (float) sum/reviews.size();
-        System.out.println("num of stars:" + numOfStars);
-
+    @Override
+    public String getName() {
+        return this.name;
     }
 
     @Override
-    public String toString() {
-        return "Restaurant{" + "name='" + name + '\'' + ", numOfStars=" + numOfStars + ", price=" + price + "$ " + reviews +'}';
+    public double getNumberOfStars() {
+        return this.numberOfStars;
     }
 
+    @Override
+    public String getPriceCategory() {
+        return this.priceCategory;
+    }
+
+    @Override
+    public void addReview(Review review) {
+        this.reviews.add(review);
+        updateStars();
+    }
+
+
+    @Override
+    public void updateStars() {
+        double current = 0;
+        for (int i=0; i < getReviews().size(); i++) {
+            current += getReviews().get(i).getStars();
+        }
+        current = current/(getReviews().size());
+        current = Math.round(current );
+        this.numberOfStars = current;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Restaurant{" +
+                "name='" + name + '\'' +
+                ", numberOfStars=" + numberOfStars +
+                ", priceCategory=" + priceCategory +
+                '}';
+    }
 }
